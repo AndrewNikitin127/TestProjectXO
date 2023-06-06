@@ -1,8 +1,9 @@
 import ticTacToe from './games/ticTacToe.js';
+import greeting from '../bin/greeting.js';
 
 export default () => {
+  greeting();
   console.log('точка входа , тут запускаются модули после старта');
-
   ticTacToe();
 };
 
