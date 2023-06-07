@@ -1,8 +1,10 @@
 import readlineSync from 'readline-sync';
+import selectAvatar from './avatars.js';
 
 const greeting = () => {
   const userName = readlineSync.question('Могу я узнать как вас зовут? ');
   console.log(`Привет ${userName}, давай сыграем в игру.`);
+  selectAvatar();
 };
 
 const greetingTwoPlayers = () => {
