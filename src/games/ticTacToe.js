@@ -56,7 +56,7 @@ const getPlayerMove = (board, emptyCell) => {
   do {
     console.log('ваш ход\n');
     x = askQuestionRange('ведите номер строки #(1-3): ', 1, 3) - 1;
-    y = askQuestionRange('ведите номер строки #(1-3): ', 1, 3) - 1;
+    y = askQuestionRange('ведите номер ячейки #(1-3): ', 1, 3) - 1;
 
     if (board[x][y] !== emptyCell) console.log('Ячейка уже занята');
   } while (board[x][y] !== emptyCell);
