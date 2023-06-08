@@ -21,7 +21,7 @@ export default () => {
     }
   }
   console.log('точка входа , тут запускаются модули после старта');
-  console.log(`Аватар первого игрока: ${playersData.playerOne.avatar}\n Аватар второго игрока ${playersData.playerTwo.avatar}`);
+  console.log(`Аватар ${playersData.playerOne.name}: ${playersData.playerOne.avatar}\n Аватар ${playersData.playerTwo.name}: ${playersData.playerTwo.avatar}`);
   ticTacToe();
 };
 
