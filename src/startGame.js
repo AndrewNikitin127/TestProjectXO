@@ -1,6 +1,6 @@
 import readlineSync from 'readline-sync';
 import ticTacToe from './games/ticTacToe.js';
-import { greeting, greetingTwoPlayers } from './greeting.js';
+import { playersData, greetingOnePlayer, greetingTwoPlayers } from './greeting.js';
 
 export default () => {
   console.log('Добро пожаловать в игру крестики нолики. Выбери режим игры A или B.');
@@ -10,16 +10,18 @@ export default () => {
   while (gameMode !== 'A' && gameMode !== 'B') {
     gameMode = readlineSync.question('Введите букву (A или B) ');
     if (gameMode === 'A' || gameMode === 'a') {
-      greeting();
+      playersData.playerOne = greetingOnePlayer();
       break;
     } else if (gameMode === 'B' || gameMode === 'b') {
-      greetingTwoPlayers();
+      playersData.playerOne = greetingOnePlayer();
+      playersData.playerTwo = greetingTwoPlayers();
       break;
     } else {
       console.log('Ошибка: Выберите режим игры (Введите A или B)');
     }
   }
   console.log('точка входа , тут запускаются модули после старта');
+  console.log(`Аватар первого игрока: ${playersData.playerOne.avatar}\n Аватар второго игрока ${playersData.playerTwo.avatar}`);
   ticTacToe();
 };
 
