@@ -1,11 +1,15 @@
 import ticTacToe from './games/ticTacToe.js';
+import ticTacToePvP from './games/ticTacToePvP.js';
 import greeting from './greeting.js';
 
 export default () => {
   const gameConf = greeting();
-
-  console.log('точка входа , тут запускаются модули после старта');
-  ticTacToe(gameConf);
+  console.log(gameConf.mode);
+  if (gameConf.mode === 'B') {
+    ticTacToePvP(gameConf);
+  } else {
+    ticTacToe(gameConf);
+  }
 };
 
 /* тут будут основное меню после запуска игры, так же
