@@ -21,7 +21,7 @@ export default () => {
   console.log('Добро пожаловать в игру крестики нолики. Выбери режим игры A или B.');
   console.log('A - Одиночная игры. \nB - Игра на двоих.');
 
-  const gameConf = { playerOne: null, playerTwo: null, gameMode: null };
+  const gameConf = { playerOne: null, playerTwo: null, mode: null };
 
   while (gameConf.mode !== 'A' && gameConf.mode !== 'B') {
     gameConf.mode = readlineSync.question('Введите букву (A или B) ').toLocaleUpperCase();
@@ -36,5 +36,6 @@ export default () => {
       console.log('Ошибка: Выберите режим игры (Введите A или B)');
     }
   }
+  console.log(gameConf);
   return gameConf;
 };
