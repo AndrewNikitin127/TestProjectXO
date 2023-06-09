@@ -17,22 +17,24 @@ const greetingTwoPlayers = () => {
   return playerTwo;
 };
 
-const playersData = {
-  playerOne: {
-    name: '',
-    avatar: '',
-  },
-  playerTwo: {
-    name: '',
-    avatar: '',
-  },
-};
+export default () => {
+  console.log('Добро пожаловать в игру крестики нолики. Выбери режим игры A или B.');
+  console.log('A - Одиночная игры. \nB - Игра на двоих.');
 
-const greeting = () => {
-  playersData.playerOne = greetingOnePlayer();
-  playersData.playerTwo = greetingTwoPlayers();
-  return playersData;
-};
+  const gameConf = { playerOne: null, playerTwo: null, gameMode: null };
 
-export { playersData, greetingOnePlayer, greetingTwoPlayers };
-export default greeting;
+  while (gameConf.mode !== 'A' && gameConf.mode !== 'B') {
+    gameConf.mode = readlineSync.question('Введите букву (A или B) ').toLocaleUpperCase();
+    if (gameConf.mode === 'A') {
+      gameConf.playerOne = greetingOnePlayer();
+      break;
+    } else if (gameConf.mode === 'B') {
+      gameConf.playerOne = greetingOnePlayer();
+      gameConf.playerTwo = greetingTwoPlayers();
+      break;
+    } else {
+      console.log('Ошибка: Выберите режим игры (Введите A или B)');
+    }
+  }
+  return gameConf;
+};
