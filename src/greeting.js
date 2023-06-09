@@ -1,15 +1,38 @@
 import readlineSync from 'readline-sync';
 import selectAvatar from './avatars.js';
 
-const greeting = () => {
-  const userName = readlineSync.question('Могу я узнать как вас зовут? ');
-  console.log(`Привет ${userName}, давай сыграем в игру.`);
-  selectAvatar();
+const greetingOnePlayer = () => {
+  const playerOne = {};
+  playerOne.name = readlineSync.question('Могу я узнать как вас зовут? ');
+  console.log(`Привет ${playerOne.name}, давай выберем тебе аватар:`);
+  playerOne.avatar = selectAvatar();
+  return playerOne;
 };
 
 const greetingTwoPlayers = () => {
-  const userNameFirst = readlineSync.question('Могу я узнать как зовут первого игрока? ');
-  const userNameSecond = readlineSync.question('Как зовут второго игрока? ');
-  console.log(`Привет ${userNameFirst} и ${userNameSecond}, давайте сыграем в игру.`);
+  const playerTwo = {};
+  playerTwo.name = readlineSync.question('Как зовут второго игрока? ');
+  console.log(`${playerTwo.name}, давай выберем тебе аватар:`);
+  playerTwo.avatar = selectAvatar();
+  return playerTwo;
 };
-export { greeting, greetingTwoPlayers };
+
+const playersData = {
+  playerOne: {
+    name: '',
+    avatar: '',
+  },
+  playerTwo: {
+    name: '',
+    avatar: '',
+  },
+};
+
+const greeting = () => {
+  playersData.playerOne = greetingOnePlayer();
+  playersData.playerTwo = greetingTwoPlayers();
+  return playersData;
+};
+
+export { playersData, greetingOnePlayer, greetingTwoPlayers };
+export default greeting;
