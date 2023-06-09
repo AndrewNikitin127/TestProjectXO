@@ -98,7 +98,7 @@ export default (gameConf) => {
     board[x][y] = charPlayer1;
     winner = checkWinner(board, emptyCell);
     if (!gameCanContinue(winner, board, emptyCell)) break;
-
+    printBoard(board);
     const [a, z] = getPlayerMove2(board, emptyCell, playerTwoName);
     board[a][z] = charPlayer2;
     winner = checkWinner(board, emptyCell);
