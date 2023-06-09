@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-expressions */
+/* eslint-disable no-lone-blocks */
 import { askQuestionRange } from '../tools.js';
 
 const printBoard = (board) => {
@@ -40,21 +42,21 @@ const checkWinner = (board, emptyCell) => {
   return emptyCell;
 };
 
-const printWinner = (winner, charPlayer1, charPlayer2) => {
+const printWinner = (winner, charPlayer1, charPlayer2, playerOneName, playerTwoName) => {
   if (winner === charPlayer1) {
-    console.log(' вы победили');
+    console.log(` победил ${playerOneName} `);
   } else if (winner === charPlayer2) {
-    console.log('вы проиграли');
+    console.log(` победил ${playerTwoName}`);
   } else {
     console.log('ничья');
   }
 };
 
-const getPlayerMove1 = (board, emptyCell) => {
+const getPlayerMove1 = (board, emptyCell, playerOneName) => {
   let x;
   let y;
   do {
-    console.log('ваш ход\n');
+    console.log(`ход игрока ${playerOneName}`);
     x = askQuestionRange('ведите номер строки #(1-3): ', 1, 3) - 1;
     y = askQuestionRange('ведите номер ячейки #(1-3): ', 1, 3) - 1;
 
@@ -63,20 +65,23 @@ const getPlayerMove1 = (board, emptyCell) => {
   return [x, y];
 };
 
-const getPlayerMove2 = (board, emptyCell) => {
-  let x;
-  let y;
+const getPlayerMove2 = (board, emptyCell, playerTwoName) => {
+  let a;
+  let z;
   do {
-    console.log('ваш ход\n');
-    x = askQuestionRange('ведите номер строки #(1-3): ', 1, 3) - 1;
-    y = askQuestionRange('ведите номер ячейки #(1-3): ', 1, 3) - 1;
+    console.log(`ход игрока ${playerTwoName}`);
+    a = askQuestionRange('ведите номер строки #(1-3): ', 1, 3) - 1;
+    z = askQuestionRange('ведите номер ячейки #(1-3): ', 1, 3) - 1;
 
-    if (board[x][y] !== emptyCell) console.log('Ячейка уже занята');
-  } while (board[x][y] !== emptyCell);
-  return [x, y];
+    if (board[a][z] !== emptyCell) console.log('Ячейка уже занята');
+  } while (board[a][z] !== emptyCell);
+  return [a, z];
 };
 
-export default () => {
+export default (gameConf) => {
+  gameConf.mode;
+  const playerOneName = gameConf.playerOne.name;
+  const playerTwoName = gameConf.playerTwo.name;
   const emptyCell = '   ';
   const board = [
     [emptyCell, emptyCell, emptyCell],
@@ -89,16 +94,16 @@ export default () => {
 
   while (gameCanContinue(winner, board, emptyCell)) {
     printBoard(board);
-    const [x, y] = getPlayerMove1(board, emptyCell);
+    const [x, y] = getPlayerMove1(board, emptyCell, playerOneName);
     board[x][y] = charPlayer1;
     winner = checkWinner(board, emptyCell);
     if (!gameCanContinue(winner, board, emptyCell)) break;
 
-    const [a, z] = getPlayerMove2(board, emptyCell);
+    const [a, z] = getPlayerMove2(board, emptyCell, playerTwoName);
     board[a][z] = charPlayer2;
     winner = checkWinner(board, emptyCell);
     if (!gameCanContinue(winner, board, emptyCell)) break;
   }
   printBoard(board);
-  printWinner(winner, charPlayer1, charPlayer2);
+  printWinner(winner, charPlayer1, charPlayer2, playerOneName, playerTwoName);
 };
