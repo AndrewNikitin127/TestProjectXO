@@ -1,6 +1,6 @@
 import readlineSync from 'readline-sync';
-import selectAvatar from './avatars.js';
 import chalk from 'chalk';
+import selectAvatar from './avatars.js';
 
 const greetingOnePlayer = () => {
   const playerOne = {};
@@ -34,7 +34,7 @@ export default () => {
       gameConf.playerTwo = greetingTwoPlayers();
       break;
     } else {
-      console.log('Ошибка: Выберите режим игры (Введите A или B)');
+      console.log(chalk.hex('#FF4F5A')('Ошибка: Выберите режим игры (Введите A или B)'));
     }
   }
   console.log(gameConf);

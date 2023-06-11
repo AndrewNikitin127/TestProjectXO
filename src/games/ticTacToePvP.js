@@ -1,8 +1,7 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-lone-blocks */
-import { askQuestionRange } from '../tools.js';
 import chalk from 'chalk';
-
+import { askQuestionRange } from '../tools.js';
 
 const printBoard = (board) => {
   console.log(chalk.bold(`\n ${board[0][0]} | ${board[0][1]} | ${board[0][2]} `));

@@ -1,5 +1,5 @@
-import { getRandomInt, askQuestionRange } from '../tools.js';
 import chalk from 'chalk';
+import { getRandomInt, askQuestionRange } from '../tools.js';
 
 const printBoard = (board) => {
   console.log(chalk.bold(`\n ${board[0][0]} | ${board[0][1]} | ${board[0][2]} `));
