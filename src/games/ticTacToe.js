@@ -1,5 +1,5 @@
 import chalk from 'chalk';
-import { getRandomInt, askQuestionRange } from '../tools.js';
+import { getRandomInt, askQuestionRange, pause } from '../tools.js';
 
 const printBoard = (board) => {
   console.log(chalk.bold(`\n ${board[0][0]} | ${board[0][1]} | ${board[0][2]} `));
@@ -87,17 +87,23 @@ export default () => {
   let winner = emptyCell;
 
   while (gameCanContinue(winner, board, emptyCell)) {
+    console.clear();
     printBoard(board);
     const [x, y] = getPlayerMove(board, emptyCell);
     board[x][y] = charPlayer1;
     winner = checkWinner(board, emptyCell);
     if (!gameCanContinue(winner, board, emptyCell)) break;
 
+    console.clear();
+    printBoard(board);
+    console.log('🤖 Компьютер думает...');
+    pause(1200);
     const [a, z] = getComputerMove(board, emptyCell);
     board[a][z] = charComputer;
     winner = checkWinner(board, emptyCell);
     if (!gameCanContinue(winner, board, emptyCell)) break;
   }
+  console.clear();
   printBoard(board);
   printWinner(winner, charPlayer1, charComputer);
 };

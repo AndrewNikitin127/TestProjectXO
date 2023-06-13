@@ -17,4 +17,14 @@ const askQuestionRange = (question, begin, end) => +readlineSync.question(questi
   limitMessage: chalk.hex('#DA104C')('Извините, $<lastInput> не подходит.'),
 });
 
-export { getRandomInt, askQuestionRange };
+// Функция добавляет паузу перед выполнением следующей
+// pause(2000) - пауза 2 секунды
+const pause = (milliseconds) => {
+  const date = Date.now();
+  let currentDate = null;
+  do {
+    currentDate = Date.now();
+  } while (currentDate - date < milliseconds);
+};
+
+export { getRandomInt, askQuestionRange, pause };
