@@ -36,6 +36,9 @@ const getComputerMove = (board, emptyCell) => {
   return [x, y];
 };
 
+const getMove = (color, charPlayer1) => (charPlayer1 === color
+  ? getPlayerMove : getComputerMove);
+
 export default () => {
   const emptyCell = '   ';
   const board = [
@@ -43,15 +46,22 @@ export default () => {
     [emptyCell, emptyCell, emptyCell],
     [emptyCell, emptyCell, emptyCell],
   ];
-  const charPlayer1 = chalk.hex('#CDB861').bold(' X ');
-  const charComputer = chalk.hex('#C38CD0').bold(' 0 ');
+  const colorX = chalk.hex('#CDB861').bold(' X ');
+  const colorY = chalk.hex('#C38CD0').bold(' 0 ');
+  const charPlayer1 = colorX;
+  const charComputer = colorY;
   let winner = emptyCell;
+
+  const move = {
+    first: getMove(colorX, charPlayer1),
+    second: getMove(colorY, charPlayer1),
+  };
 
   while (gameCanContinue(winner, board, emptyCell)) {
     console.clear();
     printBoard(board);
-    const [x, y] = getPlayerMove(board, emptyCell);
-    board[x][y] = charPlayer1;
+    const [x, y] = move.first(board, emptyCell);
+    board[x][y] = colorX;
     winner = checkWinner(board, emptyCell);
     if (!gameCanContinue(winner, board, emptyCell)) break;
 
@@ -59,8 +69,8 @@ export default () => {
     printBoard(board);
     console.log('🤖 Компьютер думает...');
     pause(1200);
-    const [a, z] = getComputerMove(board, emptyCell);
-    board[a][z] = charComputer;
+    const [a, z] = move.second(board, emptyCell);
+    board[a][z] = colorY;
     winner = checkWinner(board, emptyCell);
     if (!gameCanContinue(winner, board, emptyCell)) break;
   }
