@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-expressions */
-/* eslint-disable no-lone-blocks */
 import chalk from 'chalk';
 import { askQuestionRange } from '../tools.js';
 import { checkWinner, gameCanContinue, printBoard } from './ticTacToe_tools.js';
@@ -41,7 +39,6 @@ const getPlayerMove2 = (board, emptyCell, playerTwoName) => {
 };
 
 export default (gameConf) => {
-  gameConf.mode;
   const playerOneName = gameConf.playerOne.name;
   const playerTwoName = gameConf.playerTwo.name;
   const emptyCell = '   ';
