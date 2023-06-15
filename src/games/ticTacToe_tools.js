@@ -86,6 +86,9 @@ const getComputerRandomMove = (board, emptyCell) => {
   return [x, y];
 };
 
+const getFirstAiStep = (game, emptyCell, stupid) => (
+  stupid ? getComputerRandomMove(game, emptyCell) : [1, 1]);
+
 const getComputerAiMove = (board, emptyCell, charPlayer1, charComputer, stupid = false) => {
   const score = (game, depth) => {
     if (checkWinner(game, emptyCell) === charComputer) return 100 - depth;
@@ -93,13 +96,13 @@ const getComputerAiMove = (board, emptyCell, charPlayer1, charComputer, stupid =
     return 0;
   };
 
-  let choice = [];
+  let choice = null;
   const minMax = (game, depth = 0) => {
     if (gameIsOwer(game, emptyCell)) {
       return score(game, depth);
     }
     if (everyCellsIsEmpty(game, emptyCell)) {
-      choice = [1, 1];
+      choice = getFirstAiStep(game, emptyCell, stupid);
       return 0;
     }
     const activePlayer = depth === 0 || depth % 2 === 0 ? charComputer : charPlayer1;
@@ -118,8 +121,11 @@ const getComputerAiMove = (board, emptyCell, charPlayer1, charComputer, stupid =
       choice = moves[maxScoreIndex];
       return scores[maxScoreIndex];
     }
+    console.log(` ходы компа ${moves}`);
+    console.log(` очки компа ${scores}`);
     const minScoreIndex = scores.indexOf(_.min(scores));
     choice = moves[minScoreIndex];
+
     return scores[minScoreIndex];
   };
 
